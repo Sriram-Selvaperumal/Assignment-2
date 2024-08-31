@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *inventory;
+    int max_packets = 10;
+    int current_packets = 0;
+
+    // Initial allocation for 10 packets
+    inventory = (int *)malloc(max_packets * sizeof(int));
+
+    if (inventory == NULL) {
+        printf("Memory allocation failed\n");
+        return 1;
+    }
+
+    // Adding packets to the inventory
+    for (int i = 0; i < max_packets; i++) {
+        inventory[i] = i + 1; // Assigning some values
+        current_packets++;
+    }
+
+    // Display current inventory
+    printf("Initial Inventory:\n");
+    for (int i = 0; i < current_packets; i++) {
+        printf("Packet %d: %d\n", i + 1, inventory[i]);
+    }
+
+    // Expanding inventory
+    max_packets = 20;
+    inventory = (int *)realloc(inventory, max_packets * sizeof(int));
+    if (inventory == NULL) {
+        printf("Memory reallocation failed\n");
+        return 1;
+    }
+
+    // Adding more packets
+    for (int i = current_packets; i < max_packets; i++) {
+        inventory[i] = i + 1;
+        current_packets++;
+    }
+
+    // Display updated inventory
+    printf("\nExpanded Inventory:\n");
+    for (int i = 0; i < current_packets; i++) {
+        printf("Packet %d: %d\n", i + 1, inventory[i]);
+    }
+
+    // Shrinking inventory (let's assume only 5 packets are needed now)
+    max_packets = 5;
+    inventory = (int *)realloc(inventory, max_packets * sizeof(int));
+    if (inventory == NULL) {
+        printf("Memory reallocation failed\n");
+        return 1;
+    }
+
+    current_packets = max_packets; // Updating the current packet count
+
+    // Display shrunk inventory
+    printf("\nShrunk Inventory:\n");
+    for (int i = 0; i < current_packets; i++) {
+        printf("Packet %d: %d\n", i + 1, inventory[i]);
+    }
+
+    // Freeing memory
+    free(inventory);
+
+    return 0;
+}
