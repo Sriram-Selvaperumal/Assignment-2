@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STUDENTS 100
+#define MAX_NAME_LENGTH 50
+
+int main() {
+    char studentList[MAX_STUDENTS][MAX_NAME_LENGTH]; // Array to store student names
+    int studentCount = 0; // Counter to keep track of the number of students
+
+    char studentName[MAX_NAME_LENGTH];
+    char choice;
+
+    do {
+        // Check if there's room for more students
+        if (studentCount < MAX_STUDENTS) {
+            // Get the student's name
+            printf("Enter student's name: ");
+            scanf(" %[^\n]", studentName); // Read a line of input including spaces
+
+            // Add the student's name to the list
+            strcpy(studentList[studentCount], studentName);
+            studentCount++;
+
+            printf("Student '%s' added to the list.\n", studentName);
+        } else {
+            printf("The list is full. No more students can be added.\n");
+            break;
+        }
+
+        // Ask if the teacher wants to add another student
+        printf("Do you want to add another student? (y/n): ");
+        scanf(" %c", &choice);
+
+    } while (choice == 'y' || choice == 'Y');
+
+    // Display the list of students
+    printf("\nList of students who have submitted their assignments:\n");
+    for (int i = 0; i < studentCount; i++) {
+        printf("%d. %s\n", i + 1, studentList[i]);
+    }
+
+    return 0;
+}
