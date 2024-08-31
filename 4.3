@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+// Define a structure for Square
+struct Square {
+    int area;
+};
+
+// Define a structure for Rectangle
+struct Rectangle {
+    int length;
+    int breadth;
+};
+
+// Define a structure for Shape that contains a Square and a Rectangle
+struct Shape {
+    struct Square square;
+    struct Rectangle rectangle;
+};
+
+int main() {
+    // Create an instance of Shape
+    struct Shape shape;
+
+    // Assign values to the Square's area
+    shape.square.area = 25;
+
+    // Assign values to the Rectangle's length and breadth
+    shape.rectangle.length = 10;
+    shape.rectangle.breadth = 5;
+
+    // Calculate and display the area of the Square
+    printf("Area of the Square: %d\n", shape.square.area);
+
+    // Calculate and display the area of the Rectangle
+    int rectangleArea = shape.rectangle.length * shape.rectangle.breadth;
+    printf("Area of the Rectangle: %d\n", rectangleArea);
+
+    return 0;
+}
